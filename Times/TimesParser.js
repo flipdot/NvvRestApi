@@ -32,17 +32,36 @@ module.exports = function(html){
 	  }
 	}
 	
+	function getLines(row) {
+	  var linesImageElements = row.children(".products");
+	  
+	  var i = 0;
+	  var current;
+	  var  lineNames = [];
+	  debugger;
+	  while(current = linesImageElements.children(i)) {
+	    var lineName = current.attr("alt");
+		if(!lineName) break;
+		lineNames.push(lineName);
+	    i++;
+	  }
+	  
+	  return lineNames;
+	}
+	
 	function getTripInfo(rowId){
 	  var rowStringId = "#trOverviewC0-"+rowId;
 	  var row = tableBody.children(rowStringId);
-	  
+
 	  var departure = getDeparture(row);
-	  if(!departure) {
+	  var lines = getLines(row)
+	  if(!departure|| !lines) {
 	    return;
 	  }
 	  
 	  return {
-	    departure: departure
+	    departure: departure,
+		lines: lines
 	  }
 	}
 
