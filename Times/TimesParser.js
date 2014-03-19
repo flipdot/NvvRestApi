@@ -38,7 +38,6 @@ module.exports = function(html){
 	  var i = 0;
 	  var current;
 	  var  lineNames = [];
-	  debugger;
 	  while(current = linesImageElements.children(i)) {
 	    var lineName = current.attr("alt");
 		if(!lineName) break;
@@ -49,19 +48,45 @@ module.exports = function(html){
 	  return lineNames;
 	}
 	
+	function getDuration(row) {
+	  debugger;
+	  var durationElm = row.children(".duration");
+	  var durationText = durationElm.text();
+
+	  var durationRegex = /(\d{1,2}):(\d{2})/;
+	  var match = durationRegex.exec(durationText);
+	  
+	  if(!match) {
+	    return;
+	  }
+	  
+	  var hours = match[1];
+	  var minutes = match[2];
+	  
+	  return {
+	    hours: hours,
+		minutes: minutes
+	  }
+	}
+	
 	function getTripInfo(rowId){
 	  var rowStringId = "#trOverviewC0-"+rowId;
 	  var row = tableBody.children(rowStringId);
 
 	  var departure = getDeparture(row);
-	  var lines = getLines(row)
-	  if(!departure|| !lines) {
+	  var lines = getLines(row);
+	  var duration = getDuration(row);
+	  
+	  if(!departure ||
+	     !lines ||
+		 !duration) {
 	    return;
 	  }
 	  
 	  return {
 	    departure: departure,
-		lines: lines
+		lines: lines,
+		duration: duration
 	  }
 	}
 
