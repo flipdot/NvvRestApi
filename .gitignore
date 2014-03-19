@@ -1,1 +1,9 @@
+# general
+*~
+
+# nodejs
 node_modules
+
+# cloud0
+.c9*
+.settings
