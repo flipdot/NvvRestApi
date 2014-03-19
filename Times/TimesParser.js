@@ -69,6 +69,12 @@ module.exports = function(html){
 	  }
 	}
 	
+	function getSwitchingCount(row) {
+	  var changesElm = row.children(".changes");
+	  var changesText = changesElm.text();
+	  return parseInt(changesText);
+	}
+	
 	function getTripInfo(rowId){
 	  var rowStringId = "#trOverviewC0-"+rowId;
 	  var row = tableBody.children(rowStringId);
@@ -76,17 +82,18 @@ module.exports = function(html){
 	  var departure = getDeparture(row);
 	  var lines = getLines(row);
 	  var duration = getDuration(row);
+	  var switchingCount = getSwitchingCount(row);
 	  
-	  if(!departure ||
-	     !lines ||
-		 !duration) {
+	  if(!departure || !lines ||
+		 !duration || switchingCount < 0) {
 	    return;
 	  }
 	  
 	  return {
 	    departure: departure,
 		lines: lines,
-		duration: duration
+		duration: duration,
+		switchingCount: switchingCount
 	  }
 	}
 
