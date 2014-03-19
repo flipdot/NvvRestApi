@@ -10,10 +10,8 @@ module.exports = function(html){
 	
 	var tableBody = $("#HFSResult > table");
 	
-	function getDeparture(rowId){
-	  var rowStringId = "#trOverviewC0-"+rowId;
-	  var planed = tableBody
-	    .children(rowStringId)
+	function getDeparture(row) {
+	  var planed = row
 		.children(".time")
 		.children("div")
 		.children(".planed");
@@ -29,21 +27,33 @@ module.exports = function(html){
 	  var minute = parseInt(match[2]);
 	  
 	  return {
-	    departure: {
-		  hour: hour,
-		  minute: minute
-		}
+		hour: hour,
+		minute: minute
+	  }
+	}
+	
+	function getTripInfo(rowId){
+	  var rowStringId = "#trOverviewC0-"+rowId;
+	  var row = tableBody.children(rowStringId);
+	  
+	  var departure = getDeparture(row);
+	  if(!departure) {
+	    return;
+	  }
+	  
+	  return {
+	    departure: departure
 	  }
 	}
 
-	var departures = [];
+	var trips = [];
 	var i = 0;
 	var current;
-	while(current = getDeparture(i)){
-	  departures.push(current);
+	while(current = getTripInfo(i)){
+	  trips.push(current);
 	  i++;
 	}
 	
-	return departures;
+	return trips;
   };
 }
