@@ -10,6 +10,7 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "request": "~2.34.0",
-    "express": "~3.4.8"
+    "express": "~3.4.8",
+    "cheerio": "~0.13.1"
   }
 }
