@@ -1,12 +1,12 @@
 var request = require('request');
 var express = require('express');
 
-var TimesRequest = require(__dirname+"/Times/TimesRequest.js");
-var TimesParser = require(__dirname+"/Times/TimesParser.js");
+var TimesRequest = require(__dirname+"/TripInfo/TripInfoRequest.js");
+var TimesParser = require(__dirname+"/TripInfo/TripInfoParser.js");
 
 var app = express();
 
-app.get('/Times', function(req, res){
+app.get('/Trips', function(req, res){
   
   var startString = req.query.start;
   if(!startString) startString = new Date().valueOf();
