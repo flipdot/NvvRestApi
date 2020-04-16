@@ -9,7 +9,7 @@
   "author": "",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "request": "~2.34.0",
+    "request": "~2.88.2",
     "express": "~4.17.1",
     "cheerio": "~0.13.1"
   }
